@@ -1,0 +1,12 @@
+- name: add ubuntu openjdk ppa
+  # sudo add-apt-repositories ppa:openjdk-r/ppa
+  become: yes
+  apt_repository: repo='ppa:openjdk-r/ppa'
+  when: ansible_distribution == "Ubuntu"
+  
+- name: Package are present
+  apt:
+    name=openjdk-8-jdk
+    state=present
+  with_items: packages
+  tags: [java]
